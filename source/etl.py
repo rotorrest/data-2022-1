@@ -2,10 +2,13 @@ import os
 import requests
 import pandas as pd
 
+from source.plot import GeneratePlot
+from tqdm import tqdm
+
 class ETL:
     
     @staticmethod
-    def extract():
+    def extract(update=False)->pd.DataFrame:
         response_positivos = requests.get('https://cloud.minsa.gob.pe/s/AC2adyLkHCKjmfm/download')
 
         if response_positivos.status_code == 200: #200 es ok
@@ -21,8 +24,31 @@ class ETL:
         return df
     
     @staticmethod
-    def transform():
-        return True
+    def transform(df:pd.DataFrame)->pd.DataFrame:
+        pivot = pd.pivot_table(df, 
+                index=["FECHA_RESULTADO"],
+                columns=['DEPARTAMENTO'],
+                aggfunc=['size'],
+                fill_value=0)
+        
+        departamentos = ['AMAZONAS','ANCASH','APURIMAC','AREQUIPA','AYACUCHO','CAJAMARCA','CALLAO','CUSCO','HUANCAVELICA','HUANUCO','ICA','JUNIN','LA LIBERTAD','LAMBAYEQUE','LIMA','LORETO','MADRE DE DIOS','MOQUEGUA','PASCO','PIURA','PUNO','SAN MARTIN','TACNA','TUMBES','UCAYALI']
+        #departamentos = load_form_yaml("departamentos")
+        
+        for departamento in tqdm(departamentos, ncols=50):
+            
+            series = pivot["size"][departamento]
+            
+            GeneratePlot.compute(series, departamento)
+            
+
+        
+        """
+        pivot["size"]["LIMA"]
+        pivot["size"]["AREQUIPA"]
+        ...
+        ...
+        ...
+        """
     
     @staticmethod
     def load():
