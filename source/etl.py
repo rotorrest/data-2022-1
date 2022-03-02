@@ -41,22 +41,9 @@ class ETL:
 
         g=Graph(pivot, lista_de_fechas)
 
-        for departamento in tqdm(departamentos, ncols=50):
-            
-            
-            
+        for departamento in tqdm(departamentos, ncols=50):            
             g.compute(departamento)
-            
 
-        
-        """
-        pivot["size"]["LIMA"]
-        pivot["size"]["AREQUIPA"]
-        ...
-        ...
-        ...
-        """
-    
     @staticmethod
     def load():
         return True
