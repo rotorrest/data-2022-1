@@ -36,5 +36,5 @@ class Graph:
                 xanchor="left",
                 x=0.01)
             )
-        os.makedir("html/")
-        fig.write_html("html/"+i.capitalize()+".html")
+
+        fig.write_html("htmls/"+i.capitalize()+".html")
