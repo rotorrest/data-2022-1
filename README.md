@@ -9,4 +9,5 @@ python3 -m venv venv
 
 source activate/bin/activate
 
+pip install -r r.txt
 python3 main.py
