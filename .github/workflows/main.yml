@@ -2,7 +2,7 @@ name: ETL-chevere
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # runs at every 5th min    
+    - cron: '0 5 * * *' # runs at every 5th min    
   push:
     branches: [ main ]
 
