@@ -23,16 +23,16 @@ jobs:
         pip install -r r.txt
         python main.py
 
-      - name: commit my files
-        run: |
-          git pull
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A
-          git commit --allow-empty -m "update html" -a
+    - name: commit my files
+      run: |
+        git pull
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit --allow-empty -m "update html" -a
 
-      - name: push my changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+    - name: push my changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
